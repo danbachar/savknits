@@ -13,10 +13,10 @@ export class ProjectController {
     constructor(private readonly projectService: ProjectService) { }
 
     private async moveFileAndReturnNewPath(file: Express.Multer.File, projectName: string, where: string): Promise<string> {
-        const newDirectoryPath = path.join(file.destination, projectName, where).replace(" ", "_");
+        const newDirectoryPath = path.join(file.destination, projectName, where).replace(/\s/g, "_");
         await mkdirp(newDirectoryPath);
 
-        const clientFilePath = path.join('projects', projectName, where, file.originalname).replace(" ", "_"); // TODO: make better because of duplication with destination
+        const clientFilePath = path.join('projects', projectName, where, file.originalname).replace(/\s/g, "_"); // TODO: make better because of duplication with destination
         const newFilePath = path.join(newDirectoryPath, file.originalname);
         await fs.rename(file.path, newFilePath, (err) => { if (!!err) { console.error(err) } });
         return clientFilePath;
