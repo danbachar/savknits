@@ -6,9 +6,10 @@
   "author": "Dan Bachar <dan@bachar.co>",
   "license": "MIT",
   "scripts": {
-    "install": "cd backend && yarn install --production && cd ../frontend && yarn install --production",
+    "install": "cd backend && yarn install && cd ../frontend && yarn install",
     "postinstall": "curl -sf https://gobinaries.com/tj/node-prune | sh && node-prune && cd frontend && node-prune && cd ../backend && node-prune",
-    "start": "cd backend && yarn build && cd ../frontend && yarn build && cd ../backend && yarn start:prod"
+    "build": "cd backend && yarn build && cd ../frontend && yarn build",
+    "start": "cd backend && yarn start:prod"
   },
   "engines": {
     "node": ">=18.16.1 <19.0.0"
