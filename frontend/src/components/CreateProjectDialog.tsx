@@ -1,5 +1,6 @@
+import CloseIcon from '@mui/icons-material/Close';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconButton, TextField, Typography } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useState } from "react";
@@ -74,7 +75,16 @@ export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProj
   const fullScreen = useMediaQuery('(max-width:600px)');
 
   return <Dialog open={props.isOpen} onClose={handleClose} fullScreen={fullScreen}>
-    <DialogTitle>Start a new project</DialogTitle>
+    <DialogTitle>
+      <Grid container justifyContent="space-between">
+        <Typography gutterBottom variant="subtitle1" textAlign={"left"}>
+          Start a new project
+        </Typography>
+        <IconButton onClick={handleClose}>
+            <CloseIcon />
+        </IconButton>
+      </Grid>
+    </DialogTitle>
     <DialogContent>
       <Grid container direction="column">
         <Grid item>
@@ -83,7 +93,7 @@ export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProj
         <Grid item>
           <TextField margin="dense" id="description" label="Description" type="text" value={description} onChange={handleDescriptionChange} fullWidth variant="standard" />
         </Grid>
-        <Grid container justifyContent={"space-between"}>
+        <Grid container justifyContent="space-between">
           <Grid item>
             <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
               Pattern
