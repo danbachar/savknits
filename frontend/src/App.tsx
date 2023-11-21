@@ -1,8 +1,8 @@
+import { Grid, Typography } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import { Typography, Grid } from '@mui/material';
-import ProjectOverview from './components/ProjectOverview';
 import ProjectDetailView from './components/ProjectDetailView';
+import ProjectOverview from './components/ProjectOverview';
 
 function App() {
 

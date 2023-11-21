@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Photo } from "./photo.entity";
 import { Pattern } from "./pattern.entity";
+import { Photo } from "./photo.entity";
 
 @Entity()
 export class Project extends BaseEntity {
