@@ -1,0 +1,14 @@
+# Copyright (c) 2021 Siemens AG.
+
+version: "3"
+services:
+  db:
+    container_name: knitting_db
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=knitting
+      - POSTGRES_USER=knitting
+      - POSTGRES_DB=knitting
