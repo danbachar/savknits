@@ -68,10 +68,10 @@ export default function ProjectOverview() {
         )})}
         {
             <Grid item xs={5} md={4} lg={3} key="createNew">
-                <Card sx={{ width: 200, height: 340 }}>
+                <Card>
                     <CardActions>
                         <IconButton onClick={handleStartNewProjectClick}>
-                            <AddCircleIcon style={{ fontSize: 200, color: 'gray' }} />
+                            <AddCircleIcon style={{ fontSize: 140, color: 'gray' }} />
                         </IconButton>
                     </CardActions>
                 </Card>
