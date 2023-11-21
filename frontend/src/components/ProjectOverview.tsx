@@ -3,7 +3,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { useEffect, useState } from "react";
 import { CreateProjectDialog } from "./create-project.dialog";
 import { Link } from "react-router-dom";
-import { Project } from "../entities/project.entity";
+import { Project } from "../entities/project";
 
 export default function ProjectOverview() {
     const [projects, setProjects] = useState<Project[]>([]);

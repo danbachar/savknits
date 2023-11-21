@@ -1,7 +1,7 @@
 import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Project } from "../entities/project.entity";
+import { Project } from "../entities/project";
 import CustomImageList from "./CustomImageList";
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';

@@ -1,5 +1,5 @@
-import { Pattern } from "./pattern.entity";
-import { Photo } from "./photo.entity";
+import { Pattern } from "./pattern";
+import { Photo } from "./photo";
 
 export class Project {
     constructor(public id: string,
