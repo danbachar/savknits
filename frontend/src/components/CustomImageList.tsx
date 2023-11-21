@@ -1,10 +1,9 @@
-import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { Photo } from '../entities/photo.entity';
+import { Photo } from '../entities/photo';
 import { useEffect, useState } from 'react';
 
 function srcset(image: string, width: number, height: number, rows = 1, cols = 1) {
