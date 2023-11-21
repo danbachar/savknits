@@ -4,7 +4,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import { Photo } from '../entities/Photo.entity';
+import { Photo } from '../entities/photo.entity';
 import { useEffect, useState } from 'react';
 
 function srcset(image: string, width: number, height: number, rows = 1, cols = 1) {
