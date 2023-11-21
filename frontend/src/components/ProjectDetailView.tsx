@@ -14,7 +14,7 @@ export default function ProjectDetailView() {
     const [name, setName] = useState<string>("");
 
     useEffect(() => {
-        fetch(`http://localhost:3000/api/project/${id}`, {
+        fetch(`/api/project/${id}`, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS"
@@ -42,7 +42,7 @@ export default function ProjectDetailView() {
         formData.append('name', name);
         formData.append('filename', photo.name);
         formData.append('photo', photo);
-        fetch(`http://localhost:3000/api/project/${id}`, {
+        fetch(`/api/project/${id}`, {
             method: 'PATCH',
             headers: {
                 'Access-Control-Allow-Origin': '*',

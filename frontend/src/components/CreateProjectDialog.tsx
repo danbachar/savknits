@@ -56,7 +56,7 @@ export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProj
     formData.append('mainPhoto', photo);
     formData.append('name', name);
     formData.append('description', description);
-    fetch("http://localhost:3000/api/project", {
+    fetch("/api/project", {
       method: 'POST',
       headers: {
         'Access-Control-Allow-Origin': '*',

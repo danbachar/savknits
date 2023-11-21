@@ -21,7 +21,6 @@ if (databaseURL == null) {
 } else {
     connectDB = new DataSource({
         type: 'postgres',
-        host: 'localhost',
         port: 5432,
         url: databaseURL,
         entities: [Project, Photo, Pattern],

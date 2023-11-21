@@ -18,7 +18,7 @@ export default function ProjectOverview() {
     };
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/project", {
+        fetch("/api/project", {
             headers: {
                 'Access-Control-Allow-Origin': '*',
                 "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS"
