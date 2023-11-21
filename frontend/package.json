@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && mkdir -p ../backend/dist/client && cp -r build/* ../backend/dist/client/",
+    "build": "react-scripts build && mkdir -p ../backend/dist/client && cp -r build/* ../backend/dist/",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
