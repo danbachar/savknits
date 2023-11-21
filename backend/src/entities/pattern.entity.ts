@@ -12,6 +12,9 @@ export class Pattern {
     @Column()
     public filename: string;
 
+    @Column()
+    public featured: boolean;
+
     @ManyToOne(() => Project, project => project.patterns)
     public project: Project;
 }

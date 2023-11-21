@@ -11,6 +11,16 @@ import * as path from 'path';
 export class ProjectController {
     constructor(private readonly projectService: ProjectService) { }
 
+    private async moveFileAndReturnNewPath(file: Express.Multer.File, projectName: string, where: string): Promise<string> {
+        const newDirectoryPath = path.join(file.destination, projectName, where).replace(" ", "_");
+        await mkdirp(newDirectoryPath);
+
+        const clientFilePath = path.join('projects', projectName, where, file.originalname).replace(" ", "_"); // TODO: make better because of duplication with destination
+        const newFilePath = path.join(newDirectoryPath, file.originalname);
+        await fs.rename(file.path, newFilePath, (err) => { if (!!err) { console.error(err) } });
+        return clientFilePath;
+    }
+
     @Get()
     getAll(): Promise<Project[]> {
         return this.projectService.getAll();
@@ -30,25 +40,11 @@ export class ProjectController {
                @UploadedFiles() files: { mainPattern: Express.Multer.File[], 
                                          mainPhoto?: Express.Multer.File[] }): Promise<Project> {
         const mainPattern = files.mainPattern[0];
+        dto.mainPattern = await this.moveFileAndReturnNewPath(mainPattern, dto.name, 'patterns');
+    
+        const mainPhoto = files.mainPhoto[0];
+        dto.mainPhoto = await this.moveFileAndReturnNewPath(mainPhoto, dto.name, 'photos');
         
-        const newPatternDirectoryPath = path.join(mainPattern.destination, 'projects', 'patterns', dto.name);
-        await mkdirp(newPatternDirectoryPath);
-        files.mainPattern.forEach(async (file) => {
-            const oldFilePath = path.join(file.destination, file.fieldname);
-            const newFilePath = path.join(newPatternDirectoryPath, file.originalname);
-            await fs.rename(oldFilePath, newFilePath, console.error);
-            dto.mainPattern = newFilePath;
-        });
-
-        const newPhotosDirectoryPath = path.join(mainPattern.destination, 'projects', 'photos', dto.name);
-        await mkdirp(newPhotosDirectoryPath);
-        files.mainPhoto.forEach(async (file) => {
-            const oldFilePath = path.join(file.destination, file.filename);
-            const newFilePath = path.join(newPhotosDirectoryPath, file.originalname);
-            await fs.rename(oldFilePath, newFilePath, console.error);
-            dto.mainPhoto = newFilePath;
-        });
         return this.projectService.create(dto);
     }
-
 }

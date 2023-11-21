@@ -18,11 +18,4 @@ export class Project extends BaseEntity {
 
     @OneToMany(() => Pattern, pattern => pattern.project, { cascade: true })
     public patterns: Pattern[];
-
-    @Column()
-    public mainPattern: string;
-
-    @Column()
-    public mainPhoto: String;
-
 }

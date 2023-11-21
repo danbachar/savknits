@@ -15,14 +15,14 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-export default function CreateProjectDialog(props: { isOpen: boolean, handleDialogClose: () => void }) {
+export default function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProjectDialogClose: () => void }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [pattern, setPattern] = useState<any>();
   const [photo, setPhoto] = useState<any>();
 
   const handleClose = () => {
-    props.handleDialogClose();
+    props.handleStartNewProjectDialogClose();
   };
 
   const handleNameChange = (event: any) => {
@@ -64,7 +64,7 @@ export default function CreateProjectDialog(props: { isOpen: boolean, handleDial
       body: formData
     }).then((newProject) => {
       // TODO: add new project to list
-      props.handleDialogClose();
+      props.handleStartNewProjectDialogClose();
     }).catch((err) => {
       console.error(`Couldn't start a new project: ${err}`);
     })
