@@ -3,7 +3,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Ty
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Project } from "../entities/project";
-import { CreateProjectDialog } from "./create-project.dialog";
+import { CreateProjectDialog } from "./CreateProjectDialog";
 
 export default function ProjectOverview() {
     const [projects, setProjects] = useState<Project[]>([]);

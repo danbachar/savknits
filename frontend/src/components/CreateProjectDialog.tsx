@@ -1,6 +1,7 @@
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, TextField } from "@mui/material";
 import { styled } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { useState } from "react";
 
 export const VisuallyHiddenInput = styled('input')({
@@ -70,7 +71,9 @@ export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProj
     })
   };
 
-  return <Dialog open={props.isOpen} onClose={handleClose}>
+  const fullScreen = useMediaQuery('(max-width:600px)');
+
+  return <Dialog open={props.isOpen} onClose={handleClose} fullScreen={fullScreen}>
     <DialogTitle>Start a new project</DialogTitle>
     <DialogContent>
       <Grid container direction="column">

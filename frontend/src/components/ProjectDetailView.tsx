@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Project } from "../entities/project";
 import CustomImageList from "./CustomImageList";
-import { VisuallyHiddenInput } from "./create-project.dialog";
+import { VisuallyHiddenInput } from "./CreateProjectDialog";
 
 export default function ProjectDetailView() {
     const { id } = useParams();
