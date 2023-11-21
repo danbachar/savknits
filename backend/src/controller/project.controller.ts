@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Delete, Param, Patch, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import * as fs from 'fs';
 import { mkdirp } from 'mkdirp';
@@ -47,6 +47,11 @@ export class ProjectController {
         dto.mainPhoto = await this.moveFileAndReturnNewPath(mainPhoto, dto.name, 'photos');
         
         return this.projectService.create(dto);
+    }
+
+    @Delete(':id')
+    delete(@Param('id') id: string): Promise<Project> {
+        return this.projectService.delete(id);
     }
 
     @Patch(':id')

@@ -39,6 +39,12 @@ export class ProjectService {
         return newProject;
     }
 
+    async delete(id: string): Promise<Project> {
+        const project = await Project.findOneBy({ id });
+        
+        return Project.remove(project);
+    }
+
     async addStep(id: string, dto: ProjectAddStepDTO): Promise<Project> {
         const project = await Project.findOne({ where: { id }, relations: ["photos", "patterns"]});
         if (project == null) {
