@@ -6,8 +6,8 @@
   "author": "Dan Bachar <dan@bachar.co>",
   "license": "MIT",
   "scripts": {
-    "install": "cd ../backend && yarn && cd ../frontend && yarn",
-    "start": "cd ../backend && yarn build && cd ../frontend && yarn build && cd ../backend && yarn start:prod"
+    "install": "cd backend && yarn && cd ../frontend && yarn",
+    "start": "cd backend && yarn build && cd ../frontend && yarn build && cd ../backend && yarn start:prod"
   },
   "engines": {
     "node": ">=18.16.1 <19.0.0"
