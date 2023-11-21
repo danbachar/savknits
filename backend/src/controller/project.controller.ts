@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, NotImplementedException, Param, Patch, Post, UploadedFiles, UseInterceptors } from '@nestjs/common';
 import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { ProjectCreateDTO } from 'src/dto/project.create.dto';
 import { Project } from 'src/entities/project.entity';
@@ -6,6 +6,7 @@ import { ProjectService } from 'src/service/project.service';
 import { mkdirp } from 'mkdirp';
 import * as fs from 'fs';
 import * as path from 'path';
+import { ProjectAddStepDTO } from 'src/dto/project.add-step.dto';
 
 @Controller('/api/project')
 export class ProjectController {
@@ -46,5 +47,18 @@ export class ProjectController {
         dto.mainPhoto = await this.moveFileAndReturnNewPath(mainPhoto, dto.name, 'photos');
         
         return this.projectService.create(dto);
+    }
+
+    @Patch(':id')
+    @UseInterceptors(FileFieldsInterceptor([
+        { name: 'photo', maxCount: 1 },
+    ]))
+    async addStep(@Param("id") id: string,
+                  @Body() dto: ProjectAddStepDTO, 
+                  @UploadedFiles() files: { photo: Express.Multer.File[] }): Promise<Project> {
+        const project = await this.projectService.get(id);
+        const newFilepath = await this.moveFileAndReturnNewPath(files.photo[0], project.name, "photos");
+        dto.filename = newFilepath;
+        return this.projectService.addStep(id, dto);
     }
 }

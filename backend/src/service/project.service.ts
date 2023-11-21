@@ -1,4 +1,5 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { ProjectAddStepDTO } from "src/dto/project.add-step.dto";
 import { ProjectCreateDTO } from "src/dto/project.create.dto";
 import { Pattern } from "src/entities/pattern.entity";
 import { Photo } from "src/entities/photo.entity";
@@ -36,5 +37,20 @@ export class ProjectService {
         newProject.patterns = [pattern];
 
         return newProject;
+    }
+
+    async addStep(id: string, dto: ProjectAddStepDTO): Promise<Project> {
+        const project = await Project.findOne({ where: { id }, relations: ["photos", "patterns"]});
+        if (project == null) {
+            throw new NotFoundException("Project not found!");
+        }
+
+        const newPhoto = new Photo();
+        newPhoto.filename = `/${dto.filename}`;
+        newPhoto.name = dto.name;
+        newPhoto.featured = false;
+
+        project.photos = [...project.photos, newPhoto];
+        return project.save();
     }
 }

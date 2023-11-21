@@ -1,9 +1,9 @@
 import { Grid, Card, CardMedia, CardContent, Typography, CardActions, Button, IconButton } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { Project } from "../entities/Project.entity";
 import { useEffect, useState } from "react";
-import CreateProjectDialog from "./create-project.dialog";
+import { CreateProjectDialog } from "./create-project.dialog";
 import { Link } from "react-router-dom";
+import { Project } from "../entities/Project.entity";
 
 export default function ProjectOverview() {
     const [projects, setProjects] = useState<Project[]>([]);

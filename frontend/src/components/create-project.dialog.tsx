@@ -3,7 +3,7 @@ import { useState } from "react";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 
-const VisuallyHiddenInput = styled('input')({
+export const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
   clipPath: 'inset(50%)',
   height: 1,
@@ -15,7 +15,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-export default function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProjectDialogClose: () => void }) {
+export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProjectDialogClose: () => void }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [pattern, setPattern] = useState<any>();
