@@ -1,0 +1,12 @@
+{
+  "name": "knitting",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:danbachar/savknits.git",
+  "author": "Dan Bachar <dan@bachar.co>",
+  "license": "MIT",
+  "scripts": {
+    "install": "cd backend && yarn && cd ../frontend && yarn",
+    "start": "cd backend && yarn build && cd ../frontend && yarn build && cd ../backend && yarn start:prod"
+  }
+}
