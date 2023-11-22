@@ -4,6 +4,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, IconBu
 import { styled } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useState } from "react";
+import CircularIntegration from './CircularIntegration';
 
 export const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -22,6 +23,7 @@ export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProj
   const [description, setDescription] = useState("");
   const [pattern, setPattern] = useState<any>();
   const [photo, setPhoto] = useState<any>();
+  let isDone = new Promise(() => {});
 
   const handleClose = () => {
     props.handleStartNewProjectDialogClose();
@@ -66,15 +68,17 @@ export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProj
       body: formData
     }).then((newProject) => {
       // TODO: add new project to list
+      isDone = new Promise((res, _) => res(true));
       props.handleStartNewProjectDialogClose();
     }).catch((err) => {
+      isDone = new Promise((_, rej) => rej(false));
       console.error(`Couldn't start a new project: ${err}`);
     })
   };
 
   const fullScreen = useMediaQuery('(max-width:600px)');
 
-  return <Dialog open={props.isOpen} onClose={handleClose} fullScreen={fullScreen}>
+  return <Dialog open={props.isOpen} onClose={handleClose} fullScreen={fullScreen} fullWidth={!fullScreen} maxWidth={"sm"}>
     <DialogTitle>
       <Grid container justifyContent="space-between">
         <Typography gutterBottom variant="subtitle1" textAlign={"left"}>
@@ -111,7 +115,8 @@ export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProj
     </DialogContent>
     <DialogActions>
       <Button onClick={handleClose}>Cancel</Button>
-      <Button onClick={handleSend}>Start new project</Button>
+      {/* <Button onClick={handleSend}>Start new project</Button> */}
+      <CircularIntegration text="Start new project" handleClick={handleSend} isDone={isDone} />
     </DialogActions>
   </Dialog>;
 }
