@@ -115,7 +115,6 @@ export function CreateProjectDialog(props: { isOpen: boolean, handleStartNewProj
     </DialogContent>
     <DialogActions>
       <Button onClick={handleClose}>Cancel</Button>
-      {/* <Button onClick={handleSend}>Start new project</Button> */}
       <CircularIntegration text="Start new project" handleClick={handleSend} isDone={isDone} />
     </DialogActions>
   </Dialog>;

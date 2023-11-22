@@ -6,12 +6,14 @@ import { useParams } from "react-router-dom";
 import { Project } from "../entities/project";
 import CustomImageList from "./CustomImageList";
 import { VisuallyHiddenInput } from "./CreateProjectDialog";
+import CircularIntegration from './CircularIntegration';
 
 export default function ProjectDetailView() {
     const { id } = useParams();
     const [project, setProject] = useState<Project | null>(null);
     const [photo, setPhoto] = useState<any>();
     const [name, setName] = useState<string>("");
+    let isDone = new Promise(() => { });
 
     useEffect(() => {
         fetch(`/api/project/${id}`, {
@@ -21,7 +23,13 @@ export default function ProjectDetailView() {
             }
         })
             .then(response => response.json())
-            .then(data => setProject(data))
+            .then(data => {
+                setProject(data);
+                isDone = new Promise((_, rej) => rej(false));
+            })
+            .catch((err) => {
+                console.error(`Couldn't update a the project: ${err}`);
+            })
     }, [id]);
 
     const handlePhotoPathChange = (event: any) => {
@@ -89,11 +97,17 @@ export default function ProjectDetailView() {
                     Add Progress
                 </Typography>
                 <TextField autoFocus margin="dense" id="name" label="Name" type="text" value={name} onChange={handleNameChange} fullWidth variant="standard" />
-                <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
-                    Photo
-                    <VisuallyHiddenInput type="file" onChange={handlePhotoPathChange} />
-                </Button>
-                <Button onClick={handleSend}>Submit</Button>
+                <Grid container justifyContent="space-between" justifyItems="space-between" lg={2}>
+                    <Grid item>
+                        <Button component="label" variant="contained" startIcon={<CloudUploadIcon />}>
+                            Photo
+                            <VisuallyHiddenInput type="file" onChange={handlePhotoPathChange} />
+                        </Button>
+                    </Grid>
+                    <Grid item>
+                        <CircularIntegration text="Submit" handleClick={handleSend} isDone={isDone} />
+                    </Grid>
+                </Grid>
             </Grid>
         </>;
 }
