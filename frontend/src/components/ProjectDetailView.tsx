@@ -4,9 +4,9 @@ import { Button, Grid, Link, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Project } from "../entities/project";
-import CustomImageList from "./CustomImageList";
-import { VisuallyHiddenInput } from "./CreateProjectDialog";
 import CircularIntegration from './CircularIntegration';
+import { VisuallyHiddenInput } from "./CreateProjectDialog";
+import CustomImageList from "./CustomImageList";
 
 export default function ProjectDetailView() {
     const { id } = useParams();
@@ -23,13 +23,7 @@ export default function ProjectDetailView() {
             }
         })
             .then(response => response.json())
-            .then(data => {
-                setProject(data);
-                isDone = new Promise((_, rej) => rej(false));
-            })
-            .catch((err) => {
-                console.error(`Couldn't update a the project: ${err}`);
-            })
+            .then(data => setProject(data))
     }, [id]);
 
     const handlePhotoPathChange = (event: any) => {
@@ -59,8 +53,12 @@ export default function ProjectDetailView() {
             body: formData
         })
             .then(response => response.json())
-            .then(data => setProject(data)).catch((err) => {
+            .then(data => {
+                setProject(data);
+                isDone = new Promise((res, _) => res(true));
+            }).catch((err) => {
                 console.error(`Couldn't update project: ${err}`);
+                isDone = new Promise((_, rej) => rej(false));
             })
     };
 
