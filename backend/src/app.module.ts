@@ -11,7 +11,7 @@ import { ProjectService } from './service/project.service';
       rootPath: join(__dirname, '..'),
     }),
     MulterModule.register({
-      dest: './dist/client/projects'
+      dest: './dist/projects'
     })
   ],
   controllers: [ProjectController],
